@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Lora', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: theme('colors.white');
+    color: theme('colors.stone.900');
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.2;
+  }
+}
+
+/* Retro styles only for the garden application */
+.garden-application {
+  font-family: 'Space Mono', monospace;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  background-color: theme('colors.garden.dark');
+  color: theme('colors.garden.gold');
+}
+
+.pixel-corners {
+  position: relative;
+  border: 2px solid theme('colors.garden.gold');
+  clip-path: polygon(
+    0 4px, 4px 0,
+    calc(100% - 4px) 0, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 0 calc(100% - 4px)
+  );
+}
+
+.pixel-corners::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, transparent 40%, theme('colors.garden.gold') 45%, theme('colors.garden.gold') 55%, transparent 60%);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pixel-corners:hover::before,
+.pixel-corners:focus-within::before {
+  opacity: 0.4;
+}
+
+.pixel-corners::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  background: theme('colors.garden.gold');
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+
+.pixel-corners:focus-within::after {
+  opacity: 1;
+  height: 6px;
+  box-shadow: 0 0 20px theme('colors.garden.gold');
+}
+
+/* Form elements */
+.retro-input {
+  @apply bg-garden-dark/30 text-garden-gold font-mono text-xl;
+  @apply focus:outline-none focus:ring-2 focus:ring-garden-gold;
+  @apply placeholder:text-garden-gold/40;
+  @apply transition-all duration-300;
+  text-shadow: 0 0 10px theme('colors.garden.gold');
+}
+
+.retro-input:focus {
+  border-width: 4px;
+  box-shadow: 0 0 20px theme('colors.garden.gold');
+}
+
+/* Scrollbar styling */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.garden.gold') theme('colors.garden.dark');
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: theme('colors.garden.dark');
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: theme('colors.garden.gold');
+  border-radius: 3px;
+}
+
+/* ASCII art styling */
+.ascii-art {
+  font-family: 'VT323', monospace;
+  white-space: pre;
+  color: theme('colors.garden.gold');
+  text-shadow: 0 0 10px rgba(255, 191, 0, 0.3);
+}
+
+/* Retro animations */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(255, 191, 0, 0.02) 50%
+  );
+  background-size: 100% 4px;
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+}
+
+/* Retro text effects */
+.text-glow {
+  text-shadow: 0 0 10px theme('colors.garden.gold');
+}
+
+.text-glow-sm {
+  text-shadow: 0 0 5px theme('colors.garden.gold');
+}
+
+/* Custom radio buttons */
+.retro-radio {
+  @apply appearance-none w-6 h-6 border-2 border-garden-gold;
+  @apply checked:bg-garden-gold checked:border-garden-gold;
+  @apply focus:ring-2 focus:ring-garden-gold/50;
+  clip-path: polygon(
+    0 4px, 4px 0,
+    calc(100% - 4px) 0, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 0 calc(100% - 4px)
+  );
+}

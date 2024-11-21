@@ -1,0 +1,69 @@
+@layer components {
+  .pixel-corners {
+    position: relative;
+    background: theme('colors.garden.dark');
+    border: 2px solid theme('colors.garden.gold');
+    clip-path: polygon(
+      0 5px, 5px 0,
+      calc(100% - 5px) 0, 100% 5px,
+      100% calc(100% - 5px), calc(100% - 5px) 100%,
+      5px 100%, 0 calc(100% - 5px)
+    );
+  }
+
+  .pixel-corners::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: theme('colors.garden.gold');
+    opacity: 0.3;
+  }
+
+  .pixel-corners-lg {
+    clip-path: polygon(
+      0 8px, 8px 0,
+      calc(100% - 8px) 0, 100% 8px,
+      100% calc(100% - 8px), calc(100% - 8px) 100%,
+      8px 100%, 0 calc(100% - 8px)
+    );
+  }
+
+  .pixel-corners-lg::after {
+    bottom: -6px;
+    height: 4px;
+  }
+
+  .pixel-corners:focus-within {
+    box-shadow: 0 0 20px rgba(255, 191, 0, 0.2);
+  }
+
+  .pixel-corners:hover {
+    box-shadow: 0 0 15px rgba(255, 191, 0, 0.15);
+  }
+
+  .ascii-art {
+    font-family: 'VT323', monospace;
+    white-space: pre;
+    color: theme('colors.garden.gold');
+    text-shadow: 0 0 10px rgba(255, 191, 0, 0.3);
+  }
+
+  .retro-glow {
+    text-shadow: 0 0 10px rgba(255, 191, 0, 0.3);
+  }
+
+  .retro-input {
+    @apply bg-garden-dark/30 border-2 border-garden-gold text-garden-gold font-mono;
+    @apply focus:outline-none focus:ring-2 focus:ring-garden-gold/50;
+    @apply placeholder:text-garden-gold/40;
+  }
+
+  .retro-radio {
+    @apply appearance-none w-6 h-6 border-2 border-garden-gold;
+    @apply checked:bg-garden-gold checked:border-garden-gold;
+    @apply focus:ring-2 focus:ring-garden-gold/50;
+  }
+}
